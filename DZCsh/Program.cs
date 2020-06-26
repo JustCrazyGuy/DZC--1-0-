@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace DZCsh
 {
@@ -10,18 +8,42 @@ namespace DZCsh
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Enter some text: ");
-            char input;
-            int spaceCount = 0;
-            do
+            Console.Write("Enter number:  ");
+            string str;
+            int leftNumber = 0;
+            int rightNumber = 0;
+            while (true)
             {
-                input = Console.ReadKey().KeyChar;
-                if (input == ' ')
-                    spaceCount++;
-            }
-            while (input != '.');
+                str = Console.ReadLine();
+                char[] ch = new char[str.Length];
+                ch = str.ToCharArray();
+                int[] ticketNumber = ch.Select(s => int.Parse(s.ToString())).ToArray();
+                for (int i = 0; i < ch.Length; i++)
+                {
+                    if (i < 3)
+                    {
+                        leftNumber += ticketNumber[i];
+                    }
 
-            Console.WriteLine("Spaces: " + spaceCount);
-        }
+                    else rightNumber += ticketNumber[i];
+                }
+                if (ch.Length != 6)
+                {
+                    Console.WriteLine("Error numbers!Please try again!");
+                }
+                else if (leftNumber == rightNumber)
+                {
+                    Console.WriteLine("You lucky!!!", leftNumber, rightNumber);
+                    break;
+                }
+
+                else if (leftNumber != rightNumber)
+                {
+                    Console.WriteLine("Not today.", leftNumber, rightNumber);
+                    break;
+                }
+               
+            }
         }
     }
+}
